@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_Fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後端管理</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/my.css">
+</head>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<body>
+
+<div class="m-container-small" style="width: 35em!important;">
+    <div class="ui container">
+        <div class="ui m-padded-td-massive middle aligned center aligned  grid">
+            <div class="column">
+                <h2 class="ui   teal image  header segment">
+                    <i class="ui  address card outline icon"></i>
+                    <div class="content">
+                        後台登入
+                    </div>
+                </h2>
+                <form class="ui large form segment" method="post" action="#" th:action="@{/admin/login}">
+                    <div class="ui segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="username" placeholder="帳號">
+                            </div>
+                        </div>
+                        <div class=" field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="密碼">
+                            </div>
+                        </div>
+                        <button class="ui fluid large teal submit button">Login</button>
+                    </div>
+
+                    <div class="ui mini error message"></div>
+                    <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">帳號密碼錯</div>
+
+
+
+
+
+
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--/*/<th:block th:replace="admin/_Fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/<th:block>/*/-->
+
+<script>
+    $('.ui.form').form({
+        fields : {
+            username: {
+                identifier: 'username',
+                rules: [{
+                    type: 'empty',
+                    prompt: '請輸入帳號'
+                }]
+            },
+
+            password: {
+                identifier: 'password',
+                rules: [{
+                    type: 'empty',
+                    prompt: '請輸入密碼'
+                }]
+            }
+        }
+    });
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_Fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分類管理</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/my.css">
+</head>
+<body>
+
+<!--導航-->
+<nav th:replace="admin/_Fragments :: menu(2)" class="ui inverted  attached segment m-padded-td-mini m-shadow-small">
+       <div class="ui container">
+        <div class="ui inverted stackable menu secondary ">
+            <h2 class="ui violet header item">Blog管理</h2>
+            <a href="#" class=" active m-item item m-mobile-hide "><i class="home icon"></i>首頁</a>
+            <a href="#" class="  m-item item m-mobile-hide "><i class="bars icon"></i>分類</a>
+            <a href="#" class=" m-item item m-mobile-hide "><i class="tag icon"></i>標籤</a>
+
+            <div class="ui  m-mobile-hide m-item inverted right menu ">
+                <div class="ui  inline dropdown item ">
+                    <div class="ui text">
+                        <img class="ui avatar image" src="../../static/images/rferfref.jpg" alt="">
+                        軒軒軒
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="#">註銷</a>
+                    </div>
+                </div>
+            </div>
+
+
+            
+        </div>
+       </div>
+    <a href="#" class="ui menu toggle m-mobile-show  black  button ">
+        <i class="ui align justify icon"></i>
+    </a>
+</nav>
+
+<div class="ui attached pointing menu">
+    <div class="ui  container">
+        <div class="ui right menu">
+            <a href="#" th:href="@{/admin/types/input}" class="ui item">新增</a>
+            <a href="#" th:href="@{/admin/types}" class="ui active item">列表</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="ui m-container-small m-padded-td-massive ">
+    <div class="ui container">
+        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <i class="ui close icon"></i>
+            <div class="ui header">提示:</div>
+            <p th:text="${message}">操作成功</p>
+        </div>
+        <div class="ui segment">
+            <table class="ui celled  table">
+                <thead >
+                <tr>
+                    <th></th>
+                    <th>名稱</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="type,iterStat : ${page.content}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td th:text="${type.name}">學習日誌</td>
+                    <td>
+                        <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini basic blue button">修改</a>
+                        <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}"class="ui mini red button">刪除</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                    <tr><th colspan="6">
+                        <div class="ui pagination menu " th:if="${page.totalPages}>1">
+                            <a th:href="@{/admin/types/(page=${page.number-1})}" th:unless="${page.first}"class="icon item" >上一頁</a>
+                            <a th:href="@{/admin/types/(page=${page.number+1})}" th:unless="${page.last}"class="icon item" >下一頁</a>
+                        </div>
+                        <a th:href="@{/admin/types/input}" href="#" class="ui mini right floated basic blue m-margin-tb-small button">新增</a>
+                    </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<footer th:replace="admin/_Fragments  :: footer" class="ui inverted vertical segment  m-padded-td-massive " >
+    <div class="ui center aligned container  ">
+        <div class="ui inverted divided stackable grid " >
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../../static/images/837e7rutyy4ow840cooos8c88qopfye.jpg" class="ui medium circular image" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+
+            <div class="three wide column">
+                <h4 class="ui inverted  header">最新消息</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">故事</a>
+                    <a href="#" class="item">清單</a>
+                    <a href="#" class="item">事件</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted  header">聯繫我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">E-mail</a>
+                    <a href="#" class="item">電話</a>
+
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted  header">Tony軒</h4>
+                <p class="m-text-opacity">eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-text-lined m-text-opacity">eeeeeeeeeeeeeeeeeeeeeeeeeeeeee</p>
+
+    </div>
+
+
+
+</footer>
+<!--/*/<th:block th:replace="admin/_Fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/<th:block>/*/-->
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+        });
+
+    $('.close.icon')
+    .on('click', function() {
+        $(this)
+        .closest('.message')
+        .transition('fade');
+
+
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_Fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後端管理</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/my.css">
+</head>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<body>
+
+<div class="m-container-small" style="width: 35em!important;">
+    <div class="ui container">
+        <div class="ui m-padded-td-massive middle aligned center aligned  grid">
+            <div class="column">
+                <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                    <i class="ui close icon"></i>
+                    <div class="ui header">提示:</div>
+                    <p th:text="${message}">操作成功</p>
+                </div>
+                <div class="ui  error message" th:unless="${#strings.isEmpty(errormessage)}">
+                    <i class="ui close icon"></i>
+                    <div class="ui header">提示:</div>
+                    <p th:text="${errormessage}">操作失敗</p>
+                </div>
+                <h2 class="ui   teal image  header segment">
+                    <i class="ui  address card outline icon"></i>
+                    <div class="content">
+                        後台註冊
+                    </div>
+                </h2>
+                <form class="ui large form segment" method="post" th:object="${users}" action="#" >
+                    <div class="ui segment">
+                        <div class="ui  field">
+                            <div class="ui  left icon input">
+                                <i class="ui user icon" ></i>
+                                <input type="text" name="username" placeholder="請輸入帳號名聲" th:value="*{username}">
+                            </div>
+                        </div>     <div class="ui field">
+                        <div class="ui  left icon input">
+                            <i class="ui user icon" ></i>
+                            <input type="text" name="password" placeholder="請輸入密碼" th:value="*{password}">
+                        </div>
+                    </div>
+                        <div class="ui field">
+                            <div class="ui  left icon input">
+                                <i class="ui user icon" ></i>
+                                <input type="text" name="avatar" placeholder="引用頭像"  th:value="*{avatar}">
+                            </div>
+                        </div>
+                        <div class="ui field">
+                            <div class="ui  left icon input">
+                                <i class="ui user icon" ></i>
+                                <input type="text" name="email" placeholder="E-mail"  th:value="*{email}">
+                            </div>
+                        </div>
+                        <div class="ui field">
+                            <div class="ui  left icon input">
+                                <i class="ui user icon" ></i>
+                                <input type="text" name="nickname" placeholder="請輸入暱稱"  th:value="*{nickname}">
+                            </div>
+                        </div>
+
+
+                        <div class="ui error message"></div>
+                        <!--/*/
+                        <div class="ui negative message " th:if="${#fields.hasErrors('username')}">
+                            <i class="ui close icon"></i>
+                            <div class="ui header">驗證失敗</div>
+                            <p th:errors="*{username}" class="">請填內容不符規定</p>
+
+                        </div>
+                        /*/-->
+                        <button class="ui fluid large teal submit button">創建</button>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--/*/<th:block th:replace="admin/_Fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+
+<script>
+    $('.ui.form').form({
+        fields : {
+            username: {
+                identifier: 'username',
+                rules: [{
+                    type: 'empty',
+                    prompt: '請輸入帳號'
+                }]
+            },
+
+            password: {
+                identifier: 'password',
+                rules: [{
+                    type: 'empty',
+                    prompt: '請輸入密碼'
+                }]
+            },
+            avatar: {
+                identifier: 'avatar',
+                rules: [{
+                    type: 'empty',
+                    prompt: '請輸入頭像地址'
+                }]
+            },
+            email: {
+                identifier: 'email',
+                rules: [{
+                    type: 'empty',
+                    prompt: '請輸入信箱'
+                }]
+            },
+            nickname: {
+                identifier: 'nickname',
+                rules: [{
+                    type: 'empty',
+                    prompt: '請輸入暱稱'
+                }]
+            },
+
+        }
+    });
+
+
+</script>
+<!--/*/<th:block>/*/-->
+</body>
+</html>
